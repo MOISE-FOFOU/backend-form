@@ -8,7 +8,7 @@ const authenticateToken = require('../controllers/authenticateToken');
 router.get('/Getenseignant/:id?',Enseignant.Getenseignant)
 router.get('/Getinfosenseignant/:id',Enseignant.Getinfosenseignant)
 router.post('/Postenseignant',authenticateToken, Enseignant.Postenseignant);
-router.post('/updateEnseignant',Enseignant.update);
+router.post('/Updateinfosenseignants',Enseignant.update);
 router.post('/Updateenseignant/:id',authenticateToken,Enseignant.Updateenseignant)
 router.post('/ActivateEnseignant/:id',authenticateToken,Enseignant.ActivateEnseignant)
 router.get('/Enseignant',authenticateToken, Enseignant.Enseignant);
