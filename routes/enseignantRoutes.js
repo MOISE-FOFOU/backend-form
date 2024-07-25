@@ -6,7 +6,7 @@ const authenticateToken = require('../controllers/authenticateToken');
 
 
 router.get('/Getenseignant/:id?',Enseignant.Getenseignant)
-router.get('/GetInfosenseignants/:id',Enseignant.GetInfosenseignants)
+router.get('/Getinfosenseignant/:id',Enseignant.Getinfosenseignant)
 router.post('/Postenseignant',authenticateToken, Enseignant.Postenseignant);
 router.post('/UpdateEnseignant',Enseignant.update);
 router.post('/Updateenseignant/:id',authenticateToken,Enseignant.Updateenseignant)
