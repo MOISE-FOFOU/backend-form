@@ -1,113 +1,120 @@
-<div class="recent-grid">
-    <div class="projects">
-        <div class="card mb-4">
-            <div class="card-header">
-                <span><img style="width: 70px; height: 70px;" src="/images/presentation.png"></span>
-            </div>
-            <div class="card-body">
-                <table class="table container table-bordered table-dark table-striped table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>DESCRIPTION</th>
-                            <th>TELEPHONE</th>
-                            <th>EMAIL</th>
-                            <th>ADRESSE</th>
-                            <th>IMAGE</th>                            
+<div class="recent-grid container mt-5">
+    <div class="row">
+        <!-- Main column for displaying presentations -->
+        <div class="col-lg-8">
+            <div class="projects">
+                <div class="card mb-4">
+                    <div class="card-header d-flex align-items-center">
+                        <img src="/images/presentation.png" alt="Presentation Icon" style="width: 70px; height: 70px;">
+                        <h3 class="ms-3 mb-0">Presentations</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-dark table-striped table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>DESCRIPTION</th>
+                                    <th>TELEPHONE</th>
+                                    <th>EMAIL</th>
+                                    <th>ADRESSE</th>
+                                    <th>IMAGE</th>
+                                    <th>ACTIONS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% presentations.forEach(function(presentation) { %>
+                                <tr>
+                                    <td><%= presentation.Description %></td>
+                                    <td><%= presentation.telephone %></td>
+                                    <td><%= presentation.email %></td>
+                                    <td><%= presentation.adresse %></td>
+                                    <td>
+                                        <img src="<%= presentation.Image %>" alt="Image" class="img-fluid" style="max-width: 100px;">
+                                    </td>
+                                    <td>
+                                        <div class="form-group mb-2 d-flex justify-content-around">
+                                            <button class="btn btn-light mb-2" onclick="edit('<%= presentation._id %>')">
+                                                <img src="/images/editer.png" alt="Edit" width="40" height="40" style="background-color: white;">
+                                            </button>
+                                            
+                                            <button class="btn btn-secondary mb-2" onclick="updateActive('/Activatepresentation/<%= presentation._id %>', '<%= presentation.activated %>', '/Presentation')">
+                                                <% if (presentation.activated) { %>
+                                                    <img src="/images/glissiere.png" alt="Deactivate" width="40" height="40">
+                                                <% } else { %>
+                                                    <img src="/images/eteindre.png" alt="Activate" width="40" height="40">
+                                                <% } %>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
 
-                            <th>ACTIONS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% presentations.forEach(function(presentation) { %>
-                        <tr>
-                            <td><%= presentation.Description %></td>
-                            <td><%= presentation.telephone %></td>
-                            <td><%= presentation.email %></td>
-                            <td><%= presentation.adresse %></td>
-                            <td><img src="<%= presentation.Image %>" alt="Image" class="img-fluid" style="max-width: 100px;"></td>
-                            <td>
-                                <div class="form-group mb-2">
+                                <!-- Hidden edit form for each presentation -->
+                                <tr id="editForm<%= presentation._id %>" style="display: none;">
+                                    <td colspan="6">
+                                        <form method="post" class="update-form" enctype="multipart/form-data" action="/Updatepresentation/<%= presentation._id %>">
+                                            <input type="hidden" name="_method" value="PUT">
+                                            <div class="form-group mb-2 w-100">
+                                                <label for="update-description">Description</label>
+                                                <textarea id="update-description" name="Description" class="form-control"><%= presentation.Description %></textarea>
 
-                                    <button class="btn  mb-2" onclick="edit('<%= presentation._id %>')">
-                                        <img width="40px" style="background-color: white;" height="40px" src="/images/editer.png" alt="">
-                                    </button>
-                                    
-                                    <% if (presentation.activated === true) { %>
-                                        <button class=" btn-secondary mb-2" onclick="updateActive('/Activatepresentation/<%= presentation._id %>', '<%= presentation.activated %>', '/Presentation')">
-                                            <img width="40px" height="40px" src="/images/glissiere.png" alt="">
-                                        </button>
-                                    <% } else { %>
-                                        <button class=" btn-secondary mb-2" onclick="updateActive('/Activatepresentation/<%= presentation._id %>', '<%= presentation.activated %>', '/Presentation')">
-                                            <img width="40px" height="40px" src="/images/eteindre.png" alt="">
-                                        </button>
-                                    <% } %>
-                                    
-                                    </div>
-                            </td>
-                            
-                            
-                        </tr>
-                        <tr id="editForm<%= presentation._id %>" style="display: none;">
-                            <td colspan="5">
-                                <form method="post" class="update-form" enctype="multipart/form-data" action="/Updatepresentation/<%= presentation._id %>" style="display: flex; flex-wrap: wrap;">
-                                    <input type="hidden" name="_method" value="PUT">
-                                    <div class="form-group mb-2 w-100">
-                                        <label for="update-description">Description</label>
-                                        <input type="text" id="update-description" name="Description" class="form-control" value="<%= presentation.Description %>">
+                                                <label for="telephone">Telephone</label>
+                                                <input type="text" id="telephone" name="telephone" class="form-control" value="<%= presentation.telephone %>">
 
-                                        <label for="telephone">Telephone</label>
-                                         <input type="text" id="telephone" name="telephone" class="form-control" value="<%= presentation.telephone%>">
+                                                <label for="email">Email</label>
+                                                <input type="text" id="email" name="email" class="form-control" value="<%= presentation.email %>">
 
-                                        <label for="email">Email</label>
-                                        <input type="text" id="email" name="email" class="form-control" value="<%= presentation.email %>">
-
-                                        <label for="adresse">Adresse</label>
-                                        <input type="text" id="adresse" name="adresse" class="form-control" value="<%= presentation.adresse %>">
-                                    </div>
-                                    <div class="form-group mb-2 w-100">
-                                        <label for="Image">Image</label>
-                                        <input type="file" id="Image" name="Image" class="form-control">
-                                    </div>
-                                    <div class="form-group mb-2 w-100">
-                                        <button type="submit" class="btn btn-success btn-block" onclick="clickRubrique('/Presentation');">Update</button>
-                                        <button type="button" class="btn btn-danger btn-block" onclick="edit('<%= presentation._id %>')">Cancel</button>
-                                    </div>
-                                </form>
-                            </td>
-                        </tr>
-                        <% }); %>
-                    </tbody>
-                </table>
+                                                <label for="adresse">Adresse</label>
+                                                <input type="text" id="adresse" name="adresse" class="form-control" value="<%= presentation.adresse %>">
+                                            </div>
+                                            <div class="form-group mb-2 w-100">
+                                                <label for="Image">Image</label>
+                                                <input type="file" id="Image" name="Image" class="form-control">
+                                            </div>
+                                            <div class="form-group mb-2 w-100 d-flex justify-content-between">
+                                                <button type="submit" class="btn btn-success btn-block" onclick="clickRubrique('/Presentation');">Update</button>
+                                                <button type="button" class="btn btn-danger btn-block" onclick="edit('<%= presentation._id %>')">Cancel</button>
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="customers">
-        <div class="card">
-            <div class="card-header">
-                <span><img style="width: 50px; height: 50px;" src="/images/form.png"></span>
-                <h3>Add New Presentation</h3>
-            </div>
-            <div class="card-body">
-                <form method="post" enctype="multipart/form-data" action="/Postpresentation" id="addPresentationForm">
-                    <div class="form-group mb-2">
-                        <label for="Description">Description</label>
-                        <input type="text" id="Description" name="Description" class="form-control" placeholder="Description" required>
 
-                        <label for="telephone">Telephone</label>
-                        <input type="text" id="telephone" name="telephone" class="form-control" placeholder="Telephone" required>
-
-                        <label for="eamil">Email</label>
-                        <input type="text" id="email" name="email" class="form-control" placeholder="Email" required>
-
-                        <label for="adresse">Adresse</label>
-                        <input type="text" id="adresse" name="adresse" class="form-control" placeholder="Adresse" required>
+        <!-- Sidebar column for adding new presentation -->
+        <div class="col-lg-4">
+            <div class="customers">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                        <img src="/images/form.png" alt="Form Icon" style="width: 50px; height: 50px;">
+                        <h3 class="ms-3 mb-0">Add New Presentation</h3>
                     </div>
-                    <div class="form-group mb-2">
-                        <label for="Image">Image</label>
-                        <input type="file" id="Image" name="Image" class="form-control" required>
+                    <div class="card-body">
+                        <form method="post" enctype="multipart/form-data" action="/Postpresentation" id="addPresentationForm">
+                            <div class="form-group mb-2">
+                                <label for="Description">Description</label>
+                                <input type="text" id="Description" name="Description" class="form-control" placeholder="Description" required>
+
+                                <label for="telephone">Telephone</label>
+                                <input type="text" id="telephone" name="telephone" class="form-control" placeholder="Telephone" required>
+
+                                <label for="email">Email</label>
+                                <input type="text" id="email" name="email" class="form-control" placeholder="Email" required>
+
+                                <label for="adresse">Adresse</label>
+                                <input type="text" id="adresse" name="adresse" class="form-control" placeholder="Adresse" required>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="Image">Image</label>
+                                <input type="file" id="Image" name="Image" class="form-control" required>
+                            </div>
+                            <button type="submit" onclick="clickRubrique('/Presentation');" class="btn btn-primary btn-block">Enregistrer</button>
+                        </form>
                     </div>
-                    <button type="submit" onclick="clickRubrique('/Presentation');" class="btn btn-primary btn-block">Enregistrer</button>
-                </form>
+                </div>
             </div>
         </div>
     </div>
