@@ -122,14 +122,14 @@ const getAllDocuments = (Model, fieldName) => async (req, res) => {
 
 
 const getEnseignants = (Model, fieldName) => async (req, res) => {
-    let name = req.params.id || departement;
+    let name = req.params.id1 || departement;
 
     try {
-        const group = await Model.findOne({ nom: name });
+        const group = await Model.findOne({ nom: name, [`${fieldName}._id`]: req.params.id2 });
         if (!group) {
             return res.status(404).json({ message: 'Group not found' });
         }
-        res.json(group[fieldName]);
+        res.json(group);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Error getting data' });
@@ -137,7 +137,7 @@ const getEnseignants = (Model, fieldName) => async (req, res) => {
 };
 
 
-const update = (Model,fieldName) => async (req, res) => {
+const update = (Model, fieldName) => async (req, res) => {
     upload.single('Image')(req, res, async function (err) {
         if (err instanceof multer.MulterError) {
             return res.status(500).json({ message: 'Error uploading file', error: err });
@@ -146,23 +146,39 @@ const update = (Model,fieldName) => async (req, res) => {
         }
 
         try {
-            const group = await Model.findOne({ nom: departement });
-            if (!group) {
-                return res.status(404).json({ message: 'Group not found' });
-            }
-
+            const updates = req.body;
+            let fileUrl;
+            let filename;
             if (req.file) {
-                const fileUrl = `/files/${req.file.filename}`;
-                req.body.Image = fileUrl; 
+                fileUrl = `/files/${req.file.filename}`;
+                updates.Image = fileUrl;
+                filename = req.file.filename;
             }
 
-            group[fieldName].push(req.body);
-            await group.save();
+            // Construct the update object with the dot notation to avoid conflicts
+            const updateObject = {};
+            for (const key in updates) {
+                updateObject[`${fieldName}.$.${key}`] = updates[key];
+            }
+
+            const group = await Model.findOneAndUpdate(
+                { nom: req.params.id1, [`${fieldName}._id`]: req.params.id2 },
+                { $set: updateObject },
+                { new: true, runValidators: true }
+            );
+
+            if (!group) {
+                return res.status(404).json({ message: 'Group or document not found' });
+            }
+
         } catch (error) {
             console.error(error);
+            res.status(500).json({ message: 'Error updating document', error });
         }
     });
 };
+
+
 
 
 
