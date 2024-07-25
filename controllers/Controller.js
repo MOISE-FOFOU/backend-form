@@ -120,6 +120,11 @@ const getAllDocuments = (Model, fieldName) => async (req, res) => {
     }
 };
 
+const getEnseignants= (Model,fieldName) => async (req, res) => {}
+
+
+
+
 // Generic function for POST requests
 const createDocument = (Model,fieldName) => async (req, res) => {
     upload.single('Image')(req, res, async function (err) {
