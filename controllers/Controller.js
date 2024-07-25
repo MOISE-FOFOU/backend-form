@@ -246,6 +246,7 @@ exports.Signin = async (req, res) => {
 };
 
 // Routes GET
+exports.Getinfosenseignant=getEnseignants(model.Group,'enseignants');
 exports.Getmission = getAllDocuments(model.Group, 'missions');
 exports.Getpresentation = getAllDocuments(model.Group, 'presentations');
 exports.Gethistorique = getAllDocuments(model.Group, 'historiques');
@@ -266,6 +267,7 @@ exports.Postrealisation = createDocument(model.Group, 'realisations');
 exports.Postactualite = createDocument(model.Group, 'actualites');
 
 // Routes PUT
+exports.Updateinfosenseignants=update(model.Group,'enseignants');
 exports.Updateentreprise = updateDocument(model.Group, 'entreprises');
 exports.Updatemission = updateDocument(model.Group, 'missions');
 exports.Updatepresentation = updateDocument(model.Group, 'presentations');
