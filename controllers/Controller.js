@@ -122,6 +122,7 @@ const getAllDocuments = (Model, fieldName) => async (req, res) => {
 
 const getEnseignants= (Model,fieldName) => async (req, res) => {}
 
+const update= (Model,fieldName) => async (req, res) => {}
 
 
 
