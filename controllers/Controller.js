@@ -120,9 +120,49 @@ const getAllDocuments = (Model, fieldName) => async (req, res) => {
     }
 };
 
-const getEnseignants= (Model,fieldName) => async (req, res) => {}
 
-const update= (Model,fieldName) => async (req, res) => {}
+const getEnseignants = (Model, fieldName) => async (req, res) => {
+    let name = req.params.id || departement;
+
+    try {
+        const group = await Model.findOne({ nom: name });
+        if (!group) {
+            return res.status(404).json({ message: 'Group not found' });
+        }
+        res.json(group[fieldName]);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error getting data' });
+    }
+};
+
+
+const update = (Model,fieldName) => async (req, res) => {
+    upload.single('Image')(req, res, async function (err) {
+        if (err instanceof multer.MulterError) {
+            return res.status(500).json({ message: 'Error uploading file', error: err });
+        } else if (err) {
+            return res.status(500).json({ message: 'Unknown error uploading file', error: err });
+        }
+
+        try {
+            const group = await Model.findOne({ nom: departement });
+            if (!group) {
+                return res.status(404).json({ message: 'Group not found' });
+            }
+
+            if (req.file) {
+                const fileUrl = `/files/${req.file.filename}`;
+                req.body.Image = fileUrl; 
+            }
+
+            group[fieldName].push(req.body);
+            await group.save();
+        } catch (error) {
+            console.error(error);
+        }
+    });
+};
 
 
 
