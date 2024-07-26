@@ -6,6 +6,7 @@ const authenticateToken = require('./controllers/authenticateToken'); // Chemin 
 const index = require('./controllers/Controller');
 const connectDB = require('./model/db');
 const cookieParser = require('cookie-parser');
+const cors=require('cors');
 
 // Import des routes
 const missionRoutes = require('./routes/missionRoutes')
@@ -21,14 +22,13 @@ const filepath=require('./routes/fileRoutes')
 const port = 8080;
 const app = express();
 
-// Connexion à la base de données
 connectDB();
 
 // Configuration des middlewares
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(cors())
 // Middleware d'erreur global
 app.use((err, req, res, next) => {
     console.error(err.stack);
