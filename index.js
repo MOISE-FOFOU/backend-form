@@ -28,7 +28,6 @@ connectDB();
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors())
 // Middleware d'erreur global
 app.use((err, req, res, next) => {
     console.error(err.stack);
