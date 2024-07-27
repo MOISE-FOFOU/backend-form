@@ -29,7 +29,8 @@ async function createDefaultGroupsIfNotExist() {
                     formations: [],
                     realisations: [],
                     actualites: [],
-                    entreprises: []
+                    entreprises: [],
+                    ue:[]
                 });
 
                 await newGroup.save();
