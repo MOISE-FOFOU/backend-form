@@ -104,16 +104,27 @@ const EntrepriseSchema = new mongoose.Schema({
 EntrepriseSchema.pre('save', combinaisonUniqueMiddleware);
 
 // Schéma pour la classe Enseignant
+const generatePassword = () => {
+  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let password = '';
+  for (let i = 0; i < 8; i++) {
+    password += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return password;
+};
+
+// Schéma pour la classe Enseignant
 const EnseignantSchema = new mongoose.Schema({
-    nomComplet: String,
-    adresseMail: String,
-    telephone: String,
-    domainesExpertise: String,
-    grade: String,
-    responsabilite: String,
-    Image: String,
-    activated: { type: Boolean, default: true },
-    combinaisonUnique: { type: String, unique: true }
+  nomComplet: String,
+  adresseMail: String,
+  telephone: String,
+  domainesExpertise: String,
+  grade: String,
+  responsabilite: String,
+  Image: String,
+  activated: { type: Boolean, default: true },
+  combinaisonUnique: { type: String, unique: true },
+  password: { type: String, default: () => generatePassword() }
 }, baseSchemaOptions);
 
 EnseignantSchema.pre('save', combinaisonUniqueMiddleware);
