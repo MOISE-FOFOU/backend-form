@@ -103,28 +103,40 @@ const EntrepriseSchema = new mongoose.Schema({
 
 EntrepriseSchema.pre('save', combinaisonUniqueMiddleware);
 
-// Schéma pour la classe Enseignant
+// Fonction pour générer un mot de passe
 const generatePassword = () => {
-  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let password = '';
-  for (let i = 0; i < 8; i++) {
-    password += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return password;
+    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let password = '';
+    for (let i = 0; i < 8; i++) {
+        password += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return password;
 };
+
+// Schéma pour la classe Ue
+const UeSchema = new mongoose.Schema({
+    code: String,
+    intitule: String,
+    Description: String,
+    activated: { type: Boolean, default: true },
+    combinaisonUnique: { type: String, unique: true },
+    enseignant: { type: mongoose.Schema.Types.ObjectId, ref: 'Enseignant' }
+}, baseSchemaOptions);
+
+UeSchema.pre('save', combinaisonUniqueMiddleware);
 
 // Schéma pour la classe Enseignant
 const EnseignantSchema = new mongoose.Schema({
-  nomComplet: String,
-  adresseMail: String,
-  telephone: String,
-  domainesExpertise: String,
-  grade: String,
-  responsabilite: String,
-  Image: String,
-  activated: { type: Boolean, default: true },
-  combinaisonUnique: { type: String, unique: true },
-  password: { type: String, default: () => generatePassword() }
+    nomComplet: String,
+    adresseMail: String,
+    telephone: String,
+    domainesExpertise: String,
+    grade: String,
+    responsabilite: String,
+    Image: String,
+    activated: { type: Boolean, default: true },
+    combinaisonUnique: { type: String, unique: true },
+    password: { type: String, default: generatePassword }
 }, baseSchemaOptions);
 
 EnseignantSchema.pre('save', combinaisonUniqueMiddleware);
@@ -174,11 +186,21 @@ const GroupSchema = new mongoose.Schema({
     formations: [FormationSchema],
     realisations: [RealisationSchema],
     actualites: [ActualiteSchema],
-    entreprises: [EntrepriseSchema]
+    entreprises: [EntrepriseSchema],
+    ue: [UeSchema]
 }, baseSchemaOptions);
 
 // Création des modèles
 const User = mongoose.model('User', userSchema);
 const Group = mongoose.model('Group', GroupSchema);
+const Enseignant = mongoose.model('Enseignant', EnseignantSchema);
+const Ue = mongoose.model('Ue', UeSchema);
+const Historique = mongoose.model('Historique', HistoriqueSchema);
+const Mission = mongoose.model('Mission', MissionSchema);
+const Presentation = mongoose.model('Presentation', PresentationSchema);
+const Entreprise = mongoose.model('Entreprise', EntrepriseSchema);
+const Formation = mongoose.model('Formation', FormationSchema);
+const Realisation = mongoose.model('Realisation', RealisationSchema);
+const Actualite = mongoose.model('Actualite', ActualiteSchema);
 
-module.exports = { User, Group };
+module.exports = { User, Group, Enseignant, Ue, Historique, Mission, Presentation, Entreprise, Formation, Realisation, Actualite };
