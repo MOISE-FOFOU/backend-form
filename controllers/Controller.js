@@ -274,17 +274,21 @@ const updateIsActive = (Model, fieldName) => async (req, res) => {
 
 // User management
 exports.Signup = async (req, res) => {
-    const { email, password, departement } = req.body;
     try {
-        const existingUser = await model.User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({ message: 'User already exists' });
+       
+
+         const group = await Model.findOne(
+                { nom: 'informatique', [`enseignants.adresseMail`]: req.body.adresseMail,[`enseignants.password`]: req.body.password },
+                { $set: updateObject },
+                { new: true, runValidators: true }
+            );
+
+        if (!group) {
+            return res.status(400).json({ message: 'Invalid email or password' });
         }
-        const newUser = new model.User({ email, password, departement });
-        await newUser.save();
-        await exports.Signin(req, res);
+        renderView(teacher, { [fieldName]: group })(req, res);
     } catch (error) {
-        res.status(500).json({ message: 'Error creating user', error });
+        res.status(500).json({ message: 'Error during authentication', error });
     }
 };
 
