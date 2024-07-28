@@ -274,24 +274,21 @@ const updateIsActive = (Model, fieldName) => async (req, res) => {
 
 // User management
 exports.Signup = async (req, res) => {
-    const fieldname='enseignants';
+    const fieldname = 'enseignants';
     try {
-       
-
-         const group = await Model.findOne(
-                { nom: 'informatique', [`${fieldname}.adresseMail`]: req.body.adresseMail,[`${fieldname}.password`]: req.body.password },
-                { $set: updateObject },
-                { new: true, runValidators: true }
-            );
+        const group = await Model.findOne(
+            { nom: 'informatique', [`${fieldname}.adresseMail`]: req.body.adresseMail, [`${fieldname}.password`]: req.body.password }
+        );
 
         if (!group) {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
-        renderView(teacher, { [fieldName]: group })(req, res);
+        renderView('teacher', { [fieldname]: group })(req, res);
     } catch (error) {
         res.status(500).json({ message: 'Error during authentication', error });
     }
 };
+
 
 exports.Signin = async (req, res) => {
     const { email, password } = req.body;
