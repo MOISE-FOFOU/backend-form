@@ -287,7 +287,7 @@ exports.Signup = async (req, res) => {
         const enseignant = group[fieldName].find(e => e.adresseMail === req.body.adresseMail);
 
         // Vérifiez si l'enseignant existe et si le mot de passe correspond
-        if (!enseignant || !await bcrypt.compare(req.body.password, enseignant.password)) {
+        if (!enseignant || enseignant.password !== req.body.password) {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
 
