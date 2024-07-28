@@ -30,7 +30,7 @@ async function createDefaultGroupsIfNotExist() {
                     realisations: [],
                     actualites: [],
                     entreprises: [],
-                    ue:[]
+                    ues:[]
                 });
 
                 await newGroup.save();
@@ -104,6 +104,7 @@ exports.Mission = getDataAndRenderView(model.Group, 'missions', 'mission');
 exports.Presentation = getDataAndRenderView(model.Group, 'presentations', 'presentation');
 exports.Realisation = getDataAndRenderView(model.Group, 'realisations', 'realisation');
 exports.Entreprise = getDataAndRenderView(model.Group, 'entreprises', 'entreprise');
+exports.Ue = getDataAndRenderView(model.Group, 'ues', 'ue');
 
 // Generic function for GET requests
 const getAllDocuments = (Model, fieldName) => async (req, res) => {
@@ -310,6 +311,9 @@ exports.Signin = async (req, res) => {
 
 // Routes GET
 exports.Getinfosenseignant=getEnseignants(model.Group,'enseignants');
+exports.Getueinfos=getEnseignants(model.Group,'ues');
+exports.Getue=getAllDocuments(model.Group,'ues');
+
 exports.Getmission = getAllDocuments(model.Group, 'missions');
 exports.Getpresentation = getAllDocuments(model.Group, 'presentations');
 exports.Gethistorique = getAllDocuments(model.Group, 'historiques');
@@ -320,6 +324,8 @@ exports.Getactualite = getAllDocuments(model.Group, 'actualites');
 exports.Getentreprise = getAllDocuments(model.Group, 'entreprises');
 
 // Routes POST
+exports.Postue = createDocument(model.Group, 'ues');
+
 exports.Postentreprise = createDocument(model.Group, 'entreprises');
 exports.Postmission = createDocument(model.Group, 'missions');
 exports.Postpresentation = createDocument(model.Group, 'presentations');
@@ -330,6 +336,8 @@ exports.Postrealisation = createDocument(model.Group, 'realisations');
 exports.Postactualite = createDocument(model.Group, 'actualites');
 
 // Routes PUT
+exports.Updateue = updateDocument(model.Group, 'ues');
+
 exports.Updateinfosenseignants=update(model.Group,'enseignants');
 exports.Updateentreprise = updateDocument(model.Group, 'entreprises');
 exports.Updatemission = updateDocument(model.Group, 'missions');
@@ -341,6 +349,8 @@ exports.Updaterealisation = updateDocument(model.Group, 'realisations');
 exports.Updateactualite = updateDocument(model.Group, 'actualites');
 
 // Routes PATCH (Update activated)
+exports.Updateue = updateIsActive(model.Group, 'ues');
+
 exports.Activateentreprise = updateIsActive(model.Group, 'entreprises');
 exports.ActivateMission = updateIsActive(model.Group, 'missions');
 exports.ActivatePresentation = updateIsActive(model.Group, 'presentations');
