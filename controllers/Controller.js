@@ -273,9 +273,9 @@ const updateIsActive = (Model, fieldName) => async (req, res) => {
 exports.Signup = async (req, res) => {
     const fieldName = 'enseignants';
     try {
-        // Recherchez le groupe avec l'adresse e-mail et le mot de passe correspondant
+        // Recherchez le groupe avec l'adresse e-mail correspondante
         const group = await model.Group.findOne(
-            { nom: 'informatique', [`${fieldName}.adresseMail`]: req.body.adresseMail }
+            { nom: 'informatique' }
         );
 
         // Vérifiez si le groupe existe
