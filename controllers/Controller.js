@@ -274,11 +274,12 @@ const updateIsActive = (Model, fieldName) => async (req, res) => {
 
 // User management
 exports.Signup = async (req, res) => {
+    const fieldname='enseignants';
     try {
        
 
          const group = await Model.findOne(
-                { nom: 'informatique', [`enseignants.adresseMail`]: req.body.adresseMail,[`enseignants.password`]: req.body.password },
+                { nom: 'informatique', [`${fieldname}.adresseMail`]: req.body.adresseMail,[`${fieldname}.password`]: req.body.password },
                 { $set: updateObject },
                 { new: true, runValidators: true }
             );
