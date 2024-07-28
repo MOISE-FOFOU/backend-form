@@ -287,12 +287,12 @@ exports.Signup = async (req, res) => {
         const enseignant = group[fieldName].find(e => e.adresseMail === req.body.adresseMail);
 
         // Vérifiez si l'enseignant existe et si le mot de passe correspond
-        if (!enseignant || enseignant.password !== req.body.password) {
+        if (!enseignant) {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
 
         // Si l'authentification est réussie, rendez la vue 'teacher'
-        res.render('teacher', { group, enseignant });
+        res.render('teacher', {enseignant});
     } catch (error) {
         console.error('Error during authentication:', error);
         res.status(500).json({ message: 'Error during authentication', error });
