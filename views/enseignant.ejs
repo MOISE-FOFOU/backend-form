@@ -15,6 +15,8 @@
                             <th>DOMAINE EXPERTISE</th>
                             <th>GRADE</th>
                             <th>RESPONSABILITE</th>
+                            <th>PASSWORD</th>
+
                             <th>PHOTO</th>
                             <th>ACTIONS</th>
                         </tr>
@@ -28,6 +30,8 @@
                             <td><%= enseignant.domainesExpertise %></td>
                             <td><%= enseignant.grade %></td>
                             <td><%= enseignant.responsabilite %></td>
+                            <td><%= enseignant.password %></td>
+
                             <td><img src="<%= enseignant.Image %>" alt="Image" class="img-fluid" style="max-width: 100px;"></td>
                             <td>
                                         <div class="form-group mb-2 d-flex justify-content-around">
@@ -75,6 +79,11 @@
                                     <div class="form-group mb-2 w-100">
                                         <label for="update-responsabilite">Responsabilité</label>
                                         <input type="text" id="update-responsabilite" name="responsabilite" class="form-control" value="<%= enseignant.responsabilite %>">
+                                    </div>
+
+                                        <div class="form-group mb-2 w-100">
+                                        <label for="update-responsabilite">Password</label>
+                                        <input type="text" id="update-responsabilite" name="Password" class="form-control" value="<%= enseignant.Password %>">
                                     </div>
                                     <div class="form-group mb-2 w-100">
                                         <label for="Image">Image</label>
