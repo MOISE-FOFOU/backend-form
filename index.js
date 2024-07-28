@@ -17,6 +17,8 @@ const historiqueRoutes = require('./routes/historiqueRoutes');
 const presentationRoutes = require('./routes/presentationRoutes');
 const realisationRoutes = require('./routes/realisationRoutes');
 const entrepriseRoutes = require('./routes/entrepriseRoutes');
+const ueRoutes = require('./routes/ueRoute');
+
 
 const filepath=require('./routes/fileRoutes')
 const port = 8080;
@@ -54,7 +56,9 @@ app.use('/', historiqueRoutes);
 app.use('/', presentationRoutes);
 app.use('/', realisationRoutes);
 app.use('/',filepath);
-app.use('/',entrepriseRoutes)
+app.use('/',entrepriseRoutes);
+app.use('/',ueRoutes);
+
 // Routes GET et POST
 app.get('/', index.index);
 app.post('/signup', index.Signup);
