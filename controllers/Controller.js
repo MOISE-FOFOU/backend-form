@@ -279,15 +279,16 @@ exports.Signup = async (req, res) => {
         const group = await Model.findOne(
             { nom: 'informatique', [`${fieldName}.adresseMail`]: req.body.adresseMail, [`${fieldName}.password`]: req.body.password }
         );
-s
+
         if (!group) {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
-        renderView('teacher', { [fieldname]: group })(req, res);
+        render('teacher', group);
     } catch (error) {
         res.status(500).json({ message: 'Error during authentication', error });
     }
 };
+
 
 
 exports.Signin = async (req, res) => {
