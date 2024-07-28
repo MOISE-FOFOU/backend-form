@@ -274,12 +274,12 @@ const updateIsActive = (Model, fieldName) => async (req, res) => {
 
 // User management
 exports.Signup = async (req, res) => {
-    const fieldname = 'enseignants';
+    const fieldName = 'enseignants';
     try {
         const group = await Model.findOne(
-            { nom: 'informatique', [`${fieldname}.adresseMail`]: req.body.adresseMail, [`${fieldname}.password`]: req.body.password }
+            { nom: 'informatique', [`${fieldName}.adresseMail`]: req.body.adresseMail, [`${fieldName}.password`]: req.body.password }
         );
-
+s
         if (!group) {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
