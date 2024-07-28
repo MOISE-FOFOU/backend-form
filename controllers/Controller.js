@@ -349,7 +349,7 @@ exports.Updaterealisation = updateDocument(model.Group, 'realisations');
 exports.Updateactualite = updateDocument(model.Group, 'actualites');
 
 // Routes PATCH (Update activated)
-exports.Updateue = updateIsActive(model.Group, 'ues');
+exports.Activateue = updateIsActive(model.Group, 'ues');
 
 exports.Activateentreprise = updateIsActive(model.Group, 'entreprises');
 exports.ActivateMission = updateIsActive(model.Group, 'missions');
