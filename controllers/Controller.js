@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const model = require('../model/modeles');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt'); // Assurez-vous que bcrypt est installé et utilisé pour le hachage des mots de passe
 const JWT_SECRET = '1111';
 
 let departement = "";
@@ -180,12 +181,8 @@ const update = (Model, fieldName) => async (req, res) => {
     });
 };
 
-
-
-
-
 // Generic function for POST requests
-const createDocument = (Model,fieldName) => async (req, res) => {
+const createDocument = (Model, fieldName) => async (req, res) => {
     upload.single('Image')(req, res, async function (err) {
         if (err instanceof multer.MulterError) {
             return res.status(500).json({ message: 'Error uploading file', error: err });
@@ -211,6 +208,7 @@ const createDocument = (Model,fieldName) => async (req, res) => {
         }
     });
 };
+
 const updateDocument = (Model, fieldName) => async (req, res) => {
     upload.single('Image')(req, res, async function (err) {
         if (err instanceof multer.MulterError) {
@@ -252,7 +250,6 @@ const updateDocument = (Model, fieldName) => async (req, res) => {
     });
 };
 
-
 const updateIsActive = (Model, fieldName) => async (req, res) => {
     try {
         const group = await Model.findOne({ nom: departement });
@@ -276,20 +273,31 @@ const updateIsActive = (Model, fieldName) => async (req, res) => {
 exports.Signup = async (req, res) => {
     const fieldName = 'enseignants';
     try {
-        const group = await Model.findOne(
-            { nom: 'informatique', [`${fieldName}.adresseMail`]: req.body.adresseMail, [`${fieldName}.password`]: req.body.password }
+        // Recherchez le groupe avec l'adresse e-mail et le mot de passe correspondant
+        const group = await model.Group.findOne(
+            { nom: 'informatique', [`${fieldName}.adresseMail`]: req.body.adresseMail }
         );
 
+        // Vérifiez si le groupe existe
         if (!group) {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
-        render('teacher', group);
+
+        // Recherchez l'enseignant dans le groupe
+        const enseignant = group[fieldName].find(e => e.adresseMail === req.body.adresseMail);
+
+        // Vérifiez si l'enseignant existe et si le mot de passe correspond
+        if (!enseignant || !await bcrypt.compare(req.body.password, enseignant.password)) {
+            return res.status(400).json({ message: 'Invalid email or password' });
+        }
+
+        // Si l'authentification est réussie, rendez la vue 'teacher'
+        res.render('teacher', { group, enseignant });
     } catch (error) {
+        console.error('Error during authentication:', error);
         res.status(500).json({ message: 'Error during authentication', error });
     }
 };
-
-
 
 exports.Signin = async (req, res) => {
     const { email, password } = req.body;
@@ -313,9 +321,9 @@ exports.Signin = async (req, res) => {
 };
 
 // Routes GET
-exports.Getinfosenseignant=getEnseignants(model.Group,'enseignants');
-exports.Getueinfos=getEnseignants(model.Group,'ues');
-exports.Getue=getAllDocuments(model.Group,'ues');
+exports.Getinfosenseignant = getEnseignants(model.Group, 'enseignants');
+exports.Getueinfos = getEnseignants(model.Group, 'ues');
+exports.Getue = getAllDocuments(model.Group, 'ues');
 
 exports.Getmission = getAllDocuments(model.Group, 'missions');
 exports.Getpresentation = getAllDocuments(model.Group, 'presentations');
@@ -341,7 +349,7 @@ exports.Postactualite = createDocument(model.Group, 'actualites');
 // Routes PUT
 exports.Updateue = updateDocument(model.Group, 'ues');
 
-exports.Updateinfosenseignants=update(model.Group,'enseignants');
+exports.Updateinfosenseignants = update(model.Group, 'enseignants');
 exports.Updateentreprise = updateDocument(model.Group, 'entreprises');
 exports.Updatemission = updateDocument(model.Group, 'missions');
 exports.Updatepresentation = updateDocument(model.Group, 'presentations');
