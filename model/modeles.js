@@ -187,7 +187,7 @@ const GroupSchema = new mongoose.Schema({
     realisations: [RealisationSchema],
     actualites: [ActualiteSchema],
     entreprises: [EntrepriseSchema],
-    ue: [UeSchema]
+    ues: [UeSchema]
 }, baseSchemaOptions);
 
 // Création des modèles
