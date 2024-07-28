@@ -273,10 +273,8 @@ const updateIsActive = (Model, fieldName) => async (req, res) => {
 exports.Signup = async (req, res) => {
     const fieldName = 'enseignants';
     try {
-        // Recherchez le groupe avec l'adresse e-mail correspondante
-        const group = await model.Group.findOne(
-            { nom: 'informatique' }
-        );
+        // Recherchez le groupe avec le nom 'informatique'
+        const group = await model.Group.findOne({ nom: 'informatique' });
 
         // Vérifiez si le groupe existe
         if (!group) {
@@ -287,12 +285,12 @@ exports.Signup = async (req, res) => {
         const enseignant = group[fieldName].find(e => e.adresseMail === req.body.adresseMail);
 
         // Vérifiez si l'enseignant existe et si le mot de passe correspond
-        if (!enseignant) {
+        if (!enseignant || enseignant.password !== req.body.password) {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
 
         // Si l'authentification est réussie, rendez la vue 'teacher'
-        res.render('teacher', {enseignant});
+        res.render('teacher', { enseignant });
     } catch (error) {
         console.error('Error during authentication:', error);
         res.status(500).json({ message: 'Error during authentication', error });
