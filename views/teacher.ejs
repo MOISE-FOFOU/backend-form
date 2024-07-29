@@ -10,6 +10,29 @@
     <title>Profil1</title>
 </head>
 <body>
+<i class="fas fa-plus plus" id="myBtn" onclick="mybtn()"></i>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close" onclick="sopan()">&times;</span>
+            <form method="post" action="/Postrealisation" enctype="multipart/form-data" id="addrealisationForm">
+                <div class="form-group mb-2">
+                    <label for="titre">Titre</label>
+                    <input type="text" id="titre" name="titre" class="form-control" placeholder="titre" required>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="annee">Annee</label>
+                    <input type="text" id="annee" name="annee" class="form-control" placeholder="annee" required>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="Description">Description</label>
+                    <input type="text" id="Description" name="Description" class="form-control" placeholder="description" required>
+                </div>
+                <button type="submit" onclick="clickRubrique('/Realisation');" class="btn btn-primary btn-block">Enregistrer</button>
+            </form>
+        </div>
+    </div>
     <div class="principal">
         <div class="nav">
             <div class="d1">
