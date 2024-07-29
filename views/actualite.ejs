@@ -1,16 +1,42 @@
-<div class="container mt-5">
-<div class="row">
-    <div class="col-12 col-sm-3">
-        <div class="card mb-4">
-            <div class="card-header d-flex align-items-center">
-                <span><img style="width: 50px; height: 50px;" src="/images/actualite.png"></span>
+<header>
+    <h2>Actualite</h2>
+    <div class="search-wrapper">
+        <span class="fas fa-search"></span>
+        <input type="search" placeholder="search" onkeyup="filtrer()" id="search"/>
+    </div>
+  </header>
+  <main>
+    <i class="fas fa-plus plus" id="myBtn" onclick="mybtn()"></i>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close" onclick="sopan()">&times;</span>
+            <form method="post" action="/Postactualite" id="addactualiteForm" enctype="multipart/form-data">
+                <div class="form-group mb-2">
+                    <label for="titre">Titre</label>
+                    <input type="text" id="titre" name="titre" class="form-control" placeholder="titre" required>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="Description">Description</label>
+                    <input type="text" id="Description" name="Description" class="form-control" placeholder="description" required>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="semaine">Semaine</label>
+                    <input type="text" id="semaine" name="semaine" class="form-control" placeholder="semaine" required>
+                </div>
+                <button type="submit" onclick="clickRubrique('/Actualite');" class="btn btn-primary btn-block">Enregistrer</button>
+            </form>
+        </div>
+    </div>
 
-            </div>
-            <div class="card-body">
-                <table class="table table-bordered table-dark table-striped table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>TITRE</th>
+      <div class="list">
+          <h2>Liste d'actualite</h2>
+          <hr>
+          <table id="list">
+              <thead>
+                  <tr>
+                    <th>TITRE</th>
                             <th>DESCRIPTION</th>
                             <th>SEMAINE</th>
                             <th>Action</th>
@@ -19,22 +45,22 @@
                     <tbody>
                         <% actualites.forEach(function(actualite) { %>
                         <tr>
-                            <td><%= actualite.titre %></td>
+                            <td class="No"><%= actualite.titre %></td>
                             <td><%= actualite.Description %></td>
                             <td><%= actualite.semaine %></td>
                             <td>
-                                        <div class="form-group mb-2 d-flex justify-content-around">
+                                        <div class="yoyo">
                                     <button class="btn  mb-2" onclick="edit('<%= actualite._id %>')">
-                                        <img width="40px" style="background-color: white;" height="40px" src="/images/editer.png" alt="">
+                                        <i class="fas fa-pen"></i>
                                     </button>
                                     
                                     <% if (actualite.activated === true) { %>
                                         <button class=" btn-secondary mb-2" onclick="updateActive('/Activateactualite/<%= actualite._id %>', '<%= actualite.activated %>', '/Actualite')">
-                                            <img width="40px" height="40px" src="/images/glissiere.png" alt="">
+                                            <i class="fas fa-toggle-on"></i>
                                         </button>
                                     <% } else { %>
                                         <button class=" btn-secondary mb-2" onclick="updateActive('/Activateactualite/<%= actualite._id %>', '<%= actualite.activated %>', '/Actualite')">
-                                            <img width="40px" height="40px" src="/images/eteindre.png" alt="">
+                                            <i class="fas fa-toggle-off"></i>
                                         </button>
                                     <% } %>
                             </div>
@@ -64,36 +90,8 @@
                                 </form>
                             </td>
                         </tr>
-                        <% }); %>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="customers">
-        <div class="card">
-            <div class="card-header">
-                <span><img style="width: 50px; height: 50px;" src="/images/form.png"></span>
-                <h3>Add New Actualite</h3>
-            </div>
-            <div class="card-body">
-                <form method="post" action="/Postactualite" id="addactualiteForm" enctype="multipart/form-data">
-                    <div class="form-group mb-2">
-                        <label for="titre">Titre</label>
-                        <input type="text" id="titre" name="titre" class="form-control" placeholder="titre" required>
-                    </div>
-                    <div class="form-group mb-2">
-                        <label for="Description">Description</label>
-                        <input type="text" id="Description" name="Description" class="form-control" placeholder="description" required>
-                    </div>
-                    <div class="form-group mb-2">
-                        <label for="semaine">Semaine</label>
-                        <input type="text" id="semaine" name="semaine" class="form-control" placeholder="semaine" required>
-                    </div>
-                    <button type="submit" onclick="clickRubrique('/Actualite');" class="btn btn-primary btn-block">Enregistrer</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
+                    <% }); %>
+              </tbody>
+          </table>
+      </div>
+  </main>

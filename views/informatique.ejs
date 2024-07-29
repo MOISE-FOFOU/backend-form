@@ -1,4 +1,184 @@
 <!DOCTYPE html>
+<!-- Website - www.codingnepalweb.com -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Responsive Sidebar Menu HTML CSS | CodingNepal</title>
+    <link rel="stylesheet" href="css/style3.css" />
+    <link rel="stylesheet" href="css/dasboard.css">
+    <link rel="stylesheet" href="css/cards.css">
+    <!-- Boxicons CDN Link -->
+    <link href="fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      .ouvert{
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="logo-details">
+        <img src="/images/dashboard.png" width="20%" alt="">
+        <div class="logo_name">DeptBack</div>
+        <i class="fas fa-list" id="btn"></i>
+      </div>
+      <ul class="nav-list">
+        <li class="ouvert">
+          <a href="#">
+            <i class="fas fa-igloo"></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+          <span class="tooltip">Dashboard</span>
+        </li>
+        <li>
+          <a onclick="sty(1); clickRubrique('/Presentation');">
+            <i class="fas fa-users"></i>
+            <span class="links_name">Presentation</span>
+          </a>
+          <span class="tooltip">Presentation</span>
+        </li>
+        <li>
+          <a onclick="sty(2); clickRubrique('/Historique')">
+            <i class="fas fa-users"></i>
+            <span class="links_name">Historique</span>
+          </a>
+          <span class="tooltip">Historique</span>
+        </li>
+        <li>
+          <a onclick="sty(3); clickRubrique('/Mission')">
+            <i class="fas fa-users"></i>
+            <span class="links_name">Mission</span>
+          </a>
+          <span class="tooltip">Mission</span>
+        </li>
+        <li>
+          <a onclick="sty(4); clickRubrique('/Enseignant')">
+            <i class="fas fa-search"></i>
+            <span class="links_name">Enseignant</span>
+          </a>
+          <span class="tooltip">Enseignant</span>
+        </li>
+        <li>
+          <a onclick="sty(5); clickRubrique('/Formation')">
+            <i class="fas fa-file"></i>
+            <span class="links_name">Formation</span>
+          </a>
+          <span class="tooltip">Formation</span>
+        </li>
+        <li>
+          <a onclick="sty(6); clickRubrique('/Realisation')">
+            <i class="fas fa-heart"></i>
+            <span class="links_name">Realisation</span>
+          </a>
+          <span class="tooltip">Realisation</span>
+        </li>
+        <li>
+          <a onclick="sty(7); clickRubrique('/Actualite')">
+            <i class="fas fa-user"></i>
+            <span class="links_name">Actualite</span>
+          </a>
+          <span class="tooltip">Actualite</span>
+        </li>
+        <li>
+          <a onclick="sty(8); clickRubrique('/Entreprise')">
+            <i class="fas fa-user"></i>
+            <span class="links_name">Entreprise</span>
+          </a>
+          <span class="tooltip">Entreprise</span>
+        </li>
+        <li class="profile">
+          <a href="/logout">
+            <i class="fas fa-power-off"></i>
+            <span class="links_name">Quitter</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <section class="home-section" id="main-content">
+      <header>
+            <h2>Dashboard</h2>
+        </header>
+        <main>
+            <div id="cards-content" class="cards"> </div>
+        </main>
+    </section>
+
+    <script src="js/script.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/fill-card.js"></script>
+    <script>
+         function filtrer() {
+	var filtre, liste, ligne, cellule, texte ;
+	filtre=document.getElementById('search').value.toUpperCase();
+	liste=document.getElementById('list');
+	ligne=document.getElementsByTagName('td');
+
+	for (let i = 0; i < ligne.length; i++) {
+    if(ligne[i].classList.contains("No")){
+		cellule=ligne[i];
+		if (cellule) {
+			texte=cellule.innerText;
+			if(texte.toUpperCase().indexOf(filtre)>-1){
+				ligne[i].parentElement.style.display="";
+			}
+			else{
+				ligne[i].parentElement.style.display="none";
+			}
+		}
+	}}
+}
+    </script>
+    <script>
+    
+    // Get the button that opens the modal
+    //var mybtn = document.getElementById("myBtn");
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks on the button, open the modal
+    function mybtn() {
+        var modal = document.getElementById("myModal");
+      modal.style.display = "block";
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    function sopan() {
+        var modal = document.getElementById("myModal");
+      modal.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal");
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+    </script>
+    <script>
+        function sty(i) {
+          // Select the ul element
+          var ul = document.querySelector('.nav-list');
+          
+          // Retrieve all li elements within the ul
+          var liElements = ul.getElementsByTagName('li');
+          
+          // Apply CSS to the first li element
+          if (liElements.length > 0) {
+            for (let index = 0; index < (liElements.length-1); index++) {
+                liElements[index].style.backgroundColor="#11101D";
+            }
+            liElements[i].style.backgroundColor="white";
+          }
+        }
+      </script>
+  </body>
+</html>
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -33,8 +213,6 @@
                 <li><a><button class="reset-button" onclick="clickRubrique('/Mission')"><span><img style="width: 30px; height: 30px;" src="/images/mission.png"></span><span>Mission</span></button></a></li>
                 <li><a><button class="reset-button" onclick="clickRubrique('/Enseignant')"><span><img style="width: 30px; height: 30px;" src="/images/enseignant.png"></span><span>Enseignant</span></button></a></li>
                 <li><a><button class="reset-button" onclick="clickRubrique('/Formation')"><span><img style="width: 30px; height: 30px;" src="/images/formation.png"></span><span>Formation</span></button></a></li>
-                 <li><a><button class="reset-button" onclick="clickRubrique('/Ue')"><span><img style="width: 30px; height: 30px;" src="/images/actualite.png"></span><span>Ue</span></button></a></li>
-
                 <li><a><button class="reset-button" onclick="clickRubrique('/Realisation')"><span><img style="width: 30px; height: 30px;" src="/images/realisation.png"></span><span>Realisation</span></button></a></li>
                 <li><a><button class="reset-button" onclick="clickRubrique('/Actualite')"><span><img style="width: 30px; height: 30px;" src="/images/actualite.png"></span><span>Actualite</span></button></a></li>
                 <li><a><button class="reset-button" onclick="clickRubrique('/Entreprise')"><span><img style="width: 30px; height: 30px;" src="/images/entreprise.png"></span><span>Entreprise</span></button></a></li>
@@ -69,4 +247,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>
-</html>
+</html> -->
