@@ -14,29 +14,32 @@
             <span class="close" onclick="sopan()">&times;</span>
             <form method="post" action="/Postrealisation" enctype="multipart/form-data" id="addrealisationForm">
                 <div class="form-group mb-2">
-                    <label for="titre">Titre</label>
-                    <input type="text" id="titre" name="titre" class="form-control" placeholder="titre" required>
+                    <label for="titre">Code</label>
+                    <input type="text" id="titre" name="code" class="form-control" placeholder="code" required>
                 </div>
                 <div class="form-group mb-2">
-                    <label for="annee">Annee</label>
-                    <input type="text" id="annee" name="annee" class="form-control" placeholder="annee" required>
+                    <label for="annee">Intitulé </label>
+                    <input type="text" id="annee" name="intitule" class="form-control" placeholder="intitulé" required>
                 </div>
                 <div class="form-group mb-2">
                     <label for="Description">Description</label>
                     <input type="text" id="Description" name="Description" class="form-control" placeholder="description" required>
                 </div>
-                <button type="submit" onclick="clickRubrique('/Realisation');" class="btn btn-primary btn-block">Enregistrer</button>
+ <div class="form-group mb-2">
+                    <label for="Description">Id Enseignant</label>
+                    <input type="text" id="Description" name="enseignant" class="form-control" placeholder="enseignant" required>
+                </div>
+                <button type="submit" onclick="clickRubrique('/Ue');" class="btn btn-primary btn-block">Enregistrer</button>
             </form>
         </div>
     </div>
 
       <div class="list">
-          <h2>Liste de realisation</h2>
+          <h2>Liste des ues</h2>
           <hr>
           <table id="list">
               <thead>
                   <tr>
-                    <th>TITRE</th>
                             <th>CODE</th>
                             <th>INTITULÉ </th>
                             <th>DESCRIPTION </th>
@@ -53,7 +56,7 @@
 
                             <td>
                                         <div class="yoyo">
-                                    <button class="btn  mb-2" onclick="edit('<%= realisation._id %>')">
+                                    <button class="btn  mb-2" onclick="edit('<%= ue._id %>')">
                                         <i class="fas fa-pen"></i>
                                     </button>
                                     
