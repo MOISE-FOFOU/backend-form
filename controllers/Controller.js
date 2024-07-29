@@ -140,6 +140,11 @@ const getEnseignants = (Model, fieldName) => async (req, res) => {
 };
 
 
+exports.edit = async (req, res) => {
+   res.render('teacher2');
+};
+
+
 const update = (Model, fieldName) => async (req, res) => {
     upload.single('Image')(req, res, async function (err) {
         if (err instanceof multer.MulterError) {
