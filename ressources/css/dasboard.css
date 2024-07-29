@@ -1,0 +1,171 @@
+main{
+    width: 100%;
+    height: calc(100vh - 65px);
+    margin-top: 65px;
+    padding: 1%;
+}
+.sidebar.open ~ .home-section main{
+left: 250px;
+}
+
+main .list{
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    padding: 1%;
+    border-radius: 10px;
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+}
+.list table{
+    width: 100%;
+    padding: 0.5%;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+.list th{
+    border-bottom: 1px solid black;
+}
+.list th, .list td{
+    padding: 0 0.5em;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+}
+.list th:first-child, .list td:first-child{
+    border-left: none;
+}
+.list tr:nth-child(even){
+    background-color: rgba(29, 27, 49, 0.25);
+} 
+td button{
+    border: none;
+    background: none;
+}
+td i{
+    font-size: 20px;
+}
+td .yoyo{
+    display: flex;
+    gap: 1em;
+}
+
+main form input{
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    height: 35px;
+    background-color: rgba(29, 27, 49, 0.25);
+    border-radius: 6px;
+    padding: 2%;
+}
+
+.update-form .form-groupe{
+    display: flex;
+    gap: 1em;
+    margin: 0.5%;
+}
+.update-form .form-groupe button{
+    padding: 1% 3% ;
+    color: white;
+    border: none;
+    background-color: #1d1b31;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.plus{
+    position: fixed;
+  bottom: 20px; /* Ajustez la distance du bas de la page */
+  right: 20px; /* Ajustez la distance du côté droit de la page */
+  padding: 10px 20px; /* Ajustez la taille du bouton */
+  background-color: #1d1b31; /* Couleur de fond du bouton */
+  color: white; /* Couleur du texte du bouton */
+  border: none; /* Supprime la bordure */
+  border-radius: 50px; /* Bordures arrondies */
+  cursor: pointer; /* Curseur en forme de main */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Ombre pour donner un effet de profondeur */
+  z-index: 1000; /* S'assure que le bouton reste au-dessus des autres éléments */
+  }
+  /* The Modal (background) */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 100000; /* Sit on top */
+    left: 0;
+    top: 0;
+    margin-left: 65px;
+    width: calc(100vw - 65px); /* Full width */
+    height: 100vh; /* Full height */
+    overflow: hidden; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  .sidebar.open ~ .home-section main .modal{
+    width: calc(100vw - 250px);
+    margin-left: 250px;
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: dimgrey;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0% 0% 2% 2%;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .modal form{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+  .modal form input{
+    width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      height: 35px;
+      background-color: rgb(233, 232, 232);
+      border-radius: 6px;
+      padding: 2%;
+  }
+  .modal form button{
+    width: 30%;
+      margin-left: 70%;
+      color: white;
+      border: none;
+      background-color: #1d1b31;
+      border-radius: 6px;
+      font-size: 15px;
+      padding: 1%;
+      font-weight: bold;
+      cursor: pointer;
+  }
+
+@media (max-width: 1200px) {
+    main .card{
+      display: none;
+    }
+    main .list{
+        width: 100%;
+    }
+  }

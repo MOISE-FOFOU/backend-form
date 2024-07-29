@@ -1,0 +1,86 @@
+<header>
+    <h2>Historique</h2>
+    <div class="search-wrapper">
+        <span class="fas fa-search"></span>
+        <input type="search" placeholder="search" onkeyup="filtrer()" id="search"/>
+    </div>
+  </header>
+  <main>
+    <i class="fas fa-plus plus" id="myBtn" onclick="mybtn()"></i>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close" onclick="sopan()">&times;</span>
+            <form method="post" action="/Posthistorique" id="addhistoriqueForm" enctype="multipart/form-data">
+                <div class="form-group mb-2">
+                    <label for="Description">Description</label>
+                    <input type="text" id="Description" name="Description" class="form-control" placeholder="Description" required>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="Image">Image</label>
+                    <input type="file" id="Image" name="Image" class="form-control" required>
+                </div>
+                <button type="submit" onclick="clickRubrique('/Historique');" class="btn btn-primary btn-block">Enregistrer</button>
+            </form>
+        </div>
+    </div>
+
+      <div class="list">
+          <h2>Liste d'historique</h2>
+          <hr>
+          <table id="list">
+              <thead>
+                  <tr>
+                    <th>DESCRIPTION</th>
+                    <th>IMAGE</th>
+                    <th>ACTIONS</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <% historiques.forEach(function(historique) { %>
+                    <tr>
+                        <td class="No"><%= historique.Description %></td>
+                        <td>
+                            <img src="<%= historique.Image %>" alt="Image" class="rounded mx-auto d-block" style="max-width: 100px;">
+                        </td>
+                        <td>
+                            <div class="yoyo">
+                                <button class="btn btn-light mb-2" onclick="edit('<%= historique._id %>')">
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                                
+                                <button class="btn btn-secondary mb-2" onclick="updateActive('/Activatehistorique/<%= historique._id %>', '<%= historique.activated %>', '/Historique')">
+                                    <% if (historique.activated) { %>
+                                        <i class="fas fa-toggle-on"></i>
+                                    <% } else { %>
+                                        <i class="fas fa-toggle-off"></i>
+                                    <% } %>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr id="editForm<%= historique._id %>" style="display: none;">
+                        <td colspan="3">
+                            <form method="post" class="update-form" enctype="multipart/form-data" action="/Updatehistorique/<%= historique._id %>">
+                                <input type="hidden" name="_method" value="PUT">
+                                <div class="form-group mb-2 w-100">
+                                    <label for="update-description">Description</label>
+                                    <textarea id="update-description" name="Description" class="form-control"><%= historique.Description %></textarea>
+                                </div>
+                                <div class="form-group mb-2 w-100">
+                                    <label for="Image">Image</label>
+                                    <input type="file" id="Image" name="Image" class="form-control">
+                                </div>
+                                <div class="form-group mb-2 w-100 d-flex justify-content-between">
+                                    <button type="submit" class="btn btn-success btn-block" onclick="clickRubrique('/Historique');">Update</button>
+                                    <button type="button" class="btn btn-danger btn-block" onclick="edit('<%= historique._id %>')">Cancel</button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }); %>
+              </tbody>
+          </table>
+      </div>
+  </main>

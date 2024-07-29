@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             <span>${grade}</span>
                         </div>
                         <div>
-                            <span class="las la-users"></span>
+                            <span class="fas fa-users"></span>
                         </div>
                     </div>
                 `;
