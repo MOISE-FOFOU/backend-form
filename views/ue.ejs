@@ -1,69 +1,93 @@
+<header>
+    <h2>Realisation</h2>
+    <div class="search-wrapper">
+        <span class="fas fa-search"></span>
+        <input type="search" placeholder="search" onkeyup="filtrer()" id="search"/>
+    </div>
+  </header>
+  <main>
+    <i class="fas fa-plus plus" id="myBtn" onclick="mybtn()"></i>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close" onclick="sopan()">&times;</span>
+            <form method="post" action="/Postrealisation" enctype="multipart/form-data" id="addrealisationForm">
+                <div class="form-group mb-2">
+                    <label for="titre">Titre</label>
+                    <input type="text" id="titre" name="titre" class="form-control" placeholder="titre" required>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="annee">Annee</label>
+                    <input type="text" id="annee" name="annee" class="form-control" placeholder="annee" required>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="Description">Description</label>
+                    <input type="text" id="Description" name="Description" class="form-control" placeholder="description" required>
+                </div>
+                <button type="submit" onclick="clickRubrique('/Realisation');" class="btn btn-primary btn-block">Enregistrer</button>
+            </form>
+        </div>
+    </div>
 
-<div class="container mt-5">
-<div class="row">
-    <div class="col-12 col-sm-3">
-        <div class="card mb-4">
-            <div class="card-header d-flex align-items-center">
-                <span><img style="width: 50px; height: 50px;" src="/images/actualite.png"></span>
-
-            </div>
-            <div class="card-body">
-                <table class="table table-bordered table-dark table-striped table-hover">
-                    <thead class="thead-dark">
-                        <tr>
+      <div class="list">
+          <h2>Liste de realisation</h2>
+          <hr>
+          <table id="list">
+              <thead>
+                  <tr>
+                    <th>TITRE</th>
                             <th>CODE</th>
-                            <th>INTITULE</th>
-                            <th>DESCRIPTION</th>
-                            <th>ENSEIGNANT</th>
-                            <th>Action</th>
+                            <th>INTITULÉ </th>
+                            <th>DESCRIPTION </th>
+                            <th>ID ENSEIGNANT </th>
                         </tr>
                     </thead>
                     <tbody>
                         <% ues.forEach(function(ue) { %>
                         <tr>
-                            <td><%= ue.code %></td>
+                            <td class="No"><%= ue.code %></td>
                             <td><%= ue.intitule %></td>
                             <td><%= ue.Description %></td>
                             <td><%= ue.enseignant %></td>
 
                             <td>
-                                        <div class="form-group mb-2 d-flex justify-content-around">
-                                    <button class="btn  mb-2" onclick="edit('<%= ue._id %>')">
-                                        <img width="40px" style="background-color: white;" height="40px" src="/images/editer.png" alt="">
+                                        <div class="yoyo">
+                                    <button class="btn  mb-2" onclick="edit('<%= realisation._id %>')">
+                                        <i class="fas fa-pen"></i>
                                     </button>
                                     
-                                    <% if (ue.activated === true) { %>
+                                    <% if (realisation.activated === true) { %>
                                         <button class=" btn-secondary mb-2" onclick="updateActive('/Activateue/<%= ue._id %>', '<%= ue.activated %>', '/Ue')">
-                                            <img width="40px" height="40px" src="/images/glissiere.png" alt="">
+                                            <i class="fas fa-toggle-on"></i>
                                         </button>
                                     <% } else { %>
-                                        <button class=" btn-secondary mb-2" onclick="updateActive('/Activateue/<%= actualite._id %>', '<%= ue.activated %>', '/Ue')">
-                                            <img width="40px" height="40px" src="/images/eteindre.png" alt="">
+                                        <button class=" btn-secondary mb-2" onclick="updateActive('/Activateue/<%= ue._id %>', '<%= ue.activated %>', '/Ue')">
+                                            <i class="fas fa-toggle-off"></i>
                                         </button>
                                     <% } %>
-                            </div>
-                                    
+                                </div>
                             </td>
                         </tr>
-                        <tr id="editForm<%= ue._id %>" style="display: none;">
+                        <tr id="editForm<%= realisation._id %>" style="display: none;">
                             <td colspan="6">
                                 <form method="post" class="update-form" enctype="multipart/form-data" action="/Updateue/<%= ue._id %>" style="display: flex; flex-wrap: wrap;">
                                     <input type="hidden" name="_method" value="PUT">
                                     <div class="form-group mb-2 w-100">
-                                        <label for="update-titre">code</label>
+                                        <label for="update-titre">Code</label>
                                         <input type="text" id="update-titre" name="code" class="form-control" value="<%= ue.code %>">
+                                    </div>
+                                    <div class="form-group mb-2 w-100">
+                                        <label for="update-annee">Intitule</label>
+                                        <input type="text" id="update-annee" name="intitule" class="form-control" value="<%= ue.intitule %>">
                                     </div>
                                     <div class="form-group mb-2 w-100">
                                         <label for="update-description">Description</label>
                                         <input type="text" id="update-description" name="Description" class="form-control" value="<%= ue.Description %>">
                                     </div>
-                                    <div class="form-group mb-2 w-100">
-                                        <label for="update-semaine">intitule</label>
-                                        <input type="text" id="update-semaine" name="intitule" class="form-control" value="<%= ue.intitule %>">
-                                    </div>
                                         <div class="form-group mb-2 w-100">
-                                        <label for="update-semaine">enseignant</label>
-                                        <input type="text" id="update-semaine" name="enseignant" class="form-control" value="<%= ue.enseignant %>">
+                                        <label for="update-description">Enseignant</label>
+                                        <input type="text" id="update-description" name="enseignant" class="form-control" value="<%= ue.enseignant %>">
                                     </div>
                                     <div class="form-group mb-2 w-100">
                                         <button type="submit" class="btn btn-success btn-block" onclick="clickRubrique('/Ue');">Update</button>
@@ -72,40 +96,8 @@
                                 </form>
                             </td>
                         </tr>
-                        <% }); %>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="customers">
-        <div class="card">
-            <div class="card-header">
-                <span><img style="width: 50px; height: 50px;" src="/images/form.png"></span>
-                <h3>Add New Ue</h3>
-            </div>
-            <div class="card-body">
-                <form method="post" action="/Postue" id="addueForm" enctype="multipart/form-data">
-                    <div class="form-group mb-2">
-                        <label for="titre">code</label>
-                        <input type="text" id="titre" name="code" class="form-control" placeholder="code" required>
-                    </div>
-                    <div class="form-group mb-2">
-                        <label for="Description">Description</label>
-                        <input type="text" id="Description" name="Description" class="form-control" placeholder="description" required>
-                    </div>
-                    <div class="form-group mb-2">
-                        <label for="semaine">intitule</label>
-                        <input type="text" id="semaine" name="intitule" class="form-control" placeholder="intitule" required>
-                    </div>
-                        <div class="form-group mb-2">
-                        <label for="semaine">enseignant</label>
-                        <input type="text" id="semaine" name="enseignant" class="form-control" placeholder="enseignant" required>
-                    </div>
-                    <button type="submit" onclick="clickRubrique('/Ue');" class="btn btn-primary btn-block">Enregistrer</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
+                    <% }); %>
+              </tbody>
+          </table>
+      </div>
+  </main>
