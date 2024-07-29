@@ -1,0 +1,273 @@
+*{
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+}
+
+a{
+  text-decoration: none;
+}
+
+.principal{
+  width: 100vw;
+  height: 100vh;
+  font-size: normal;
+  font-weight: normal;
+  font-family: 'Times New Roman', Times, serif;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.outer-div{
+  width: 100%;
+  height: 100%;
+}
+.inner-div {
+  width: 100%;
+  color: #071011;
+  text-align: center;
+}
+.front__bkg-photo {
+  margin-top: 20px;
+  height: 200px;
+  width: 100%;
+  background: url("../img/departement\ image.jpg") no-repeat;
+  background-size: cover;
+}
+
+.corps {
+  display: flex;
+}
+.corps .gauche{
+  width: 45%;
+}
+
+.front__face-photo{
+  position: relative;
+  top: -60px;
+  margin: auto;
+  height: 150px;
+  width: 200px;
+  border-radius: 100%;
+  border-top: 35px solid #fff;
+  background-color: #fff;
+}
+.front__face-photo img {
+  height: 100%;
+  width: 60%;
+  border-radius: 100%;
+  border: 3px #3959FF solid;
+}
+
+.front__text {
+  position: relative;
+  top: -55px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.front__text a{
+  width: max-content;
+  margin: auto;
+  color: white;
+  border: none;
+  background-color: #3959FF;
+  border-radius: 6px;
+  font-size: 15px;
+  padding: 2% 4%;
+  font-weight: bold;
+}
+.front__text .des{
+  font-size: 15px;
+  padding: 0% 15%;
+  color: grey;
+}
+.front__text-para {
+  font-size: 18px;
+}
+
+.front-icons {
+  position: relative;
+  top: 0;
+  font-size: 15px;
+  margin-right: 6px;
+  color: gray;
+}
+
+.cont{
+  display: block;
+  height: 100%;
+  border-left: 1px gray solid;
+  padding: 5% 8%;
+}
+.cont h4{
+  color: #3959FF;
+}
+.cont #act {
+  border-bottom: 2px solid #3959FF;
+}
+.cont hr{
+  color: gray;
+}
+.cont .list{
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.cont .list span{
+  padding: 8px 8px 8px 50px;
+  font-size: 15px;
+  border-radius: 20px;
+  background-color: rgb(233, 232, 232);
+  text-align: left;
+}
+.cont .entete{
+  display: flex;
+  justify-content: space-around;
+}
+.cont a{
+  color: #A3B1FF;
+}
+
+.plus{
+  color: white;
+  background-color: rgb(107, 177, 235);
+  padding: 1%;
+  border-radius: 50%;
+  cursor: pointer;
+  width: max-content;
+}
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: dimgrey;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0% 0% 2% 2%;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+form input{
+  width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    height: 35px;
+    background-color: rgb(233, 232, 232);
+    border-radius: 6px;
+    padding: 2%;
+}
+form button{
+  width: 30%;
+    margin-left: 70%;
+    color: white;
+    border: none;
+    background-color: #3959FF;
+    border-radius: 6px;
+    font-size: 15px;
+    padding: 1%;
+    font-weight: bold;
+    cursor: pointer;
+}
+@media screen and (max-width:850px){
+  .cont{
+    border-left: none;
+  }
+}
+
+.droite{
+  width: 55%;
+  padding: 2%;
+}
+
+@media screen and (max-width:950px){
+  .corps{
+    flex-direction: column;
+  }
+  .corps .gauche{
+    width: 100%;
+  }
+  .droite{
+    width: 100%;
+  }
+  .nav{
+    flex-direction: column;
+  }
+}
+.nav{
+  width: 100%;
+  position: fixed;
+  z-index: 500;
+  display: flex;
+  height: max-content;
+  padding: 0% 0% 0% 2%;
+  background-color: #A3B1FF;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+}
+.nav img{
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+.nav .d1{
+  width: 20%;
+  display: flex;
+  gap: 1em;
+}
+.nav .rech{
+  width: 70%;
+  visibility: hidden;
+}
+.nav .rech input{
+  height: 100%;
+  width: 100%;
+  background-color: #c4cdfd;
+  border: 1px solid #A3B1FF;
+  padding: 1%;
+}
+.nav .dec{
+  width: 10%;
+}
+.nav .dec button{
+  width: 100%;
+  height: 100%;
+  color: white;
+  border: none;
+  background-color: #A3B1FF;
+}
