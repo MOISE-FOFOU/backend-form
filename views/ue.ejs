@@ -1,11 +1,11 @@
 <header>
-    <h2>Ue</h2>
+    <h2>UE</h2>
     <div class="search-wrapper">
         <span class="fas fa-search"></span>
-        <input type="search" placeholder="search" onkeyup="filtrer()" id="search"/>
+        <input type="search" placeholder="Recherche" onkeyup="filtrer()" id="search"/>
     </div>
-  </header>
-  <main>
+</header>
+<main>
     <i class="fas fa-plus plus" id="myBtn" onclick="mybtn()"></i>
     <!-- The Modal -->
     <div id="myModal" class="modal">
@@ -14,93 +14,93 @@
             <span class="close" onclick="sopan()">&times;</span>
             <form method="post" action="/Postue" enctype="multipart/form-data" id="ueForm">
                 <div class="form-group mb-2">
-                    <label for="titre">Code</label>
-                    <input type="text" id="titre" name="code" class="form-control" placeholder="code" required>
+                    <label for="create-code">Code</label>
+                    <input type="text" id="create-code" name="code" class="form-control" placeholder="Code" required>
                 </div>
                 <div class="form-group mb-2">
-                    <label for="annee">Intitulé </label>
-                    <input type="text" id="annee" name="intitule" class="form-control" placeholder="intitulé" required>
+                    <label for="create-intitule">Intitulé</label>
+                    <input type="text" id="create-intitule" name="intitule" class="form-control" placeholder="Intitulé" required>
                 </div>
                 <div class="form-group mb-2">
-                    <label for="Description">Description</label>
-                    <input type="text" id="Description" name="Description" class="form-control" placeholder="description" required>
+                    <label for="create-description">Description</label>
+                    <input type="text" id="create-description" name="Description" class="form-control" placeholder="Description" required>
                 </div>
- <div class="form-group mb-2">
-                    <label for="Description">Id Enseignant</label>
-                    <input type="text" id="Description" name="enseignant" class="form-control" placeholder="enseignant" required>
+                <div class="form-group mb-2">
+                    <label for="create-enseignant">Id Enseignant</label>
+                    <input type="text" id="create-enseignant" name="enseignant" class="form-control" placeholder="Id Enseignant" required>
                 </div>
                 <button type="submit" onclick="clickRubrique('/Ue');" class="btn btn-primary btn-block">Enregistrer</button>
             </form>
         </div>
     </div>
 
-      <div class="list">
-          <h2>Liste des ues</h2>
-          <hr>
-          <table id="list">
-              <thead>
-                  <tr>
-                            <th>CODE</th>
-                            <th>INTITULÉ </th>
-                            <th>DESCRIPTION </th>
-                            <th>ID ENSEIGNANT </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% ues.forEach(function(ue) { %>
-                        <tr>
-                            <td class="No"><%= ue.code %></td>
-                            <td><%= ue.intitule %></td>
-                            <td><%= ue.Description %></td>
-                            <td><%= ue.enseignant %></td>
+    <div class="list">
+        <h2>Liste des UE</h2>
+        <hr>
+        <table id="list">
+            <thead>
+                <tr>
+                    <th>CODE</th>
+                    <th>INTITULÉ</th>
+                    <th>DESCRIPTION</th>
+                    <th>ID ENSEIGNANT</th>
+                    <th>ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% ues.forEach(function(ue) { %>
+                <tr>
+                    <td><%= ue.code %></td>
+                    <td><%= ue.intitule %></td>
+                    <td><%= ue.Description %></td>
+                    <td><%= ue.enseignant %></td>
+                    <td>
+                        <div class="yoyo">
+                            <button class="btn mb-2" onclick="edit('<%= ue._id %>')">
+                                <i class="fas fa-pen"></i>
+                            </button>
 
-                            <td>
-                                        <div class="yoyo">
-                                    <button class="btn  mb-2" onclick="edit('<%= ue._id %>')">
-                                        <i class="fas fa-pen"></i>
-                                    </button>
-                                    
-                                    <% if (realisation.activated === true) { %>
-                                        <button class=" btn-secondary mb-2" onclick="updateActive('/Activateue/<%= ue._id %>', '<%= ue.activated %>', '/Ue')">
-                                            <i class="fas fa-toggle-on"></i>
-                                        </button>
-                                    <% } else { %>
-                                        <button class=" btn-secondary mb-2" onclick="updateActive('/Activateue/<%= ue._id %>', '<%= ue.activated %>', '/Ue')">
-                                            <i class="fas fa-toggle-off"></i>
-                                        </button>
-                                    <% } %>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr id="editForm<%= ue._id %>" style="display: none;">
-                            <td colspan="6">
-                                <form method="post" class="update-form" enctype="multipart/form-data" action="/Updateue/<%= ue._id %>" style="display: flex; flex-wrap: wrap;">
-                                    <input type="hidden" name="_method" value="PUT">
-                                    <div class="form-group mb-2 w-100">
-                                        <label for="update-titre">Code</label>
-                                        <input type="text" id="update-titre" name="code" class="form-control" value="<%= ue.code %>">
-                                    </div>
-                                    <div class="form-group mb-2 w-100">
-                                        <label for="update-annee">Intitule</label>
-                                        <input type="text" id="update-annee" name="intitule" class="form-control" value="<%= ue.intitule %>">
-                                    </div>
-                                    <div class="form-group mb-2 w-100">
-                                        <label for="update-description">Description</label>
-                                        <input type="text" id="update-description" name="Description" class="form-control" value="<%= ue.Description %>">
-                                    </div>
-                                        <div class="form-group mb-2 w-100">
-                                        <label for="update-description">Enseignant</label>
-                                        <input type="text" id="update-description" name="enseignant" class="form-control" value="<%= ue.enseignant %>">
-                                    </div>
-                                    <div class="form-group mb-2 w-100">
-                                        <button type="submit" class="btn btn-success btn-block" onclick="clickRubrique('/Ue');">Update</button>
-                                        <button type="button" class="btn btn-danger btn-block" onclick="edit('<%= ue._id %>')">Cancel</button>
-                                    </div>
-                                </form>
-                            </td>
-                        </tr>
-                    <% }); %>
-              </tbody>
-          </table>
-      </div>
-  </main>
+                            <% if (ue.activated === true) { %>
+                                <button class="btn-secondary mb-2" onclick="updateActive('/Activateue/<%= ue._id %>', '<%= ue.activated %>', '/Ue')">
+                                    <i class="fas fa-toggle-on"></i>
+                                </button>
+                            <% } else { %>
+                                <button class="btn-secondary mb-2" onclick="updateActive('/Activateue/<%= ue._id %>', '<%= ue.activated %>', '/Ue')">
+                                    <i class="fas fa-toggle-off"></i>
+                                </button>
+                            <% } %>
+                        </div>
+                    </td>
+                </tr>
+                <tr id="editForm<%= ue._id %>" style="display: none;">
+                    <td colspan="5">
+                        <form method="post" class="update-form" enctype="multipart/form-data" action="/Updateue/<%= ue._id %>" style="display: flex; flex-wrap: wrap;">
+                            <input type="hidden" name="_method" value="PUT">
+                            <div class="form-group mb-2 w-100">
+                                <label for="update-code<%= ue._id %>">Code</label>
+                                <input type="text" id="update-code<%= ue._id %>" name="code" class="form-control" value="<%= ue.code %>">
+                            </div>
+                            <div class="form-group mb-2 w-100">
+                                <label for="update-intitule<%= ue._id %>">Intitulé</label>
+                                <input type="text" id="update-intitule<%= ue._id %>" name="intitule" class="form-control" value="<%= ue.intitule %>">
+                            </div>
+                            <div class="form-group mb-2 w-100">
+                                <label for="update-description<%= ue._id %>">Description</label>
+                                <input type="text" id="update-description<%= ue._id %>" name="Description" class="form-control" value="<%= ue.Description %>">
+                            </div>
+                            <div class="form-group mb-2 w-100">
+                                <label for="update-enseignant<%= ue._id %>">Enseignant</label>
+                                <input type="text" id="update-enseignant<%= ue._id %>" name="enseignant" class="form-control" value="<%= ue.enseignant %>">
+                            </div>
+                            <div class="form-group mb-2 w-100">
+                                <button type="submit" class="btn btn-success btn-block" onclick="clickRubrique('/Ue');">Update</button>
+                                <button type="button" class="btn btn-danger btn-block" onclick="edit('<%= ue._id %>')">Cancel</button>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+</main>
