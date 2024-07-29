@@ -32,13 +32,18 @@
                 <div class="corps">
                     <div class="gauche">
                         <div class="front__face-photo">
-                            <img src="./dist/img/me.jpg" alt="">
+                            <img src="https://backend-form-gv2c.onrender.com/<%=enseignant.Image%>" alt="">
                         </div>
                         <div class="front__text">
                             <h1 class="front__text-header"><%=enseignant.nomComplet%></h1>
-                            <p class="front__text-para"><i class="fas fa-user"></i> Docteur</p>
+                            <p class="front__text-para"><i class="fas fa-user"></i><%=enseignant.grade%></p>
+                            <p class="des"><%=enseignant.responsabilite%></p>
+
                             <a href="/Enseignantedit">Edit profil</a>
-                            <p class="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci laboriosam dolorem, numquam eaque corrupti quo id, sunt aliquid magnam, delectus quia? Temporibus necessitatibus ipsa, alias dignissimos repudiandae laudantium vero aperiam.</p>
+                            <p class="des"><%=enseignant.domainesExpertise%></p>
+                            <p class="front__text-para"><i class="fas fa-phone"></i><%=enseignant.telephone%></p>
+                            <p class="front__text-para"><i class="fas fa-email"></i><%=enseignant.adresseMail%></p>
+
                         </div>
                     </div>
                     <div class="droite">
