@@ -12,5 +12,7 @@ router.post('/Updateinfosenseignants/:id1/:id2',Enseignant.Updateinfosenseignant
 router.post('/Updateenseignant/:id',authenticateToken,Enseignant.Updateenseignant)
 router.post('/ActivateEnseignant/:id',authenticateToken,Enseignant.ActivateEnseignant)
 router.get('/Enseignant',authenticateToken, Enseignant.Enseignant);
+router.get('/Enseignantedit', Enseignant.edit);
+
 
 module.exports = router;
