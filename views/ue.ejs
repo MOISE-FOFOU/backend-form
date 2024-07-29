@@ -1,5 +1,5 @@
 <header>
-    <h2>Realisation</h2>
+    <h2>Ue</h2>
     <div class="search-wrapper">
         <span class="fas fa-search"></span>
         <input type="search" placeholder="search" onkeyup="filtrer()" id="search"/>
@@ -12,7 +12,7 @@
         <!-- Modal content -->
         <div class="modal-content">
             <span class="close" onclick="sopan()">&times;</span>
-            <form method="post" action="/Postue" enctype="multipart/form-data" id="addrealisationForm">
+            <form method="post" action="/Postue" enctype="multipart/form-data" id="ueForm">
                 <div class="form-group mb-2">
                     <label for="titre">Code</label>
                     <input type="text" id="titre" name="code" class="form-control" placeholder="code" required>
@@ -72,7 +72,7 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr id="editForm<%= realisation._id %>" style="display: none;">
+                        <tr id="editForm<%= ue._id %>" style="display: none;">
                             <td colspan="6">
                                 <form method="post" class="update-form" enctype="multipart/form-data" action="/Updateue/<%= ue._id %>" style="display: flex; flex-wrap: wrap;">
                                     <input type="hidden" name="_method" value="PUT">
