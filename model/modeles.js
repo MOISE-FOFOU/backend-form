@@ -20,7 +20,6 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-// Avant de sauvegarder l'utilisateur, hasher le mot de passe
 userSchema.pre('save', async function(next) {
     if (!this.isModified('password')) {
         return next();
