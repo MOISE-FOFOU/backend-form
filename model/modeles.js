@@ -120,7 +120,7 @@ const UeSchema = new mongoose.Schema({
     Description: String,
     activated: { type: Boolean, default: true },
     combinaisonUnique: { type: String, unique: true },
-    enseignant:String; 
+    enseignant:String
 }, baseSchemaOptions);
 
 UeSchema.pre('save', combinaisonUniqueMiddleware);
