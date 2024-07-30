@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +27,7 @@
         <div class="outer-div">
             <div class="inner-div">
                 <div class="front__bkg-photo">
-
+                    <!-- Background Photo -->
                 </div>
                 <div class="corps">
                     <div class="gauche">
@@ -36,15 +35,13 @@
                             <img src="https://backend-form-gv2c.onrender.com<%= enseignant.Image %>" alt="Image">
                         </div>
                         <div class="front__text">
-                            <h1 class="front__text-header"><%=enseignant.nomComplet%></h1>
-                            <p class="front__text-para"><i class="fas fa-user"></i><%=enseignant.grade%></p>
-                            <p class="des"><%=enseignant.responsabilite%></p>
-
+                            <h1 class="front__text-header"><%= enseignant.nomComplet %></h1>
+                            <p class="front__text-para"><i class="fas fa-user"></i><%= enseignant.grade %></p>
+                            <p class="des"><%= enseignant.responsabilite %></p>
                             <a href="/Enseignantedit">Edit profil</a>
-                            <p class="des"><%=enseignant.domainesExpertise%></p>
-                            <p class="front__text-para"><i class="fas fa-phone"></i><%=enseignant.telephone%></p>
-                            <p class="front__text-para"><i class="fas fa-email"></i><%=enseignant.adresseMail%></p>
-
+                            <p class="des"><%= enseignant.domainesExpertise %></p>
+                            <p class="front__text-para"><i class="fas fa-phone"></i><%= enseignant.telephone %></p>
+                            <p class="front__text-para"><i class="fas fa-email"></i><%= enseignant.adresseMail %></p>
                         </div>
                     </div>
                     <div class="droite">
@@ -61,23 +58,20 @@
                                     <div class="modal-content">
                                         <span class="close">&times;</span>
                                         <form action="/Updateinfosenseignants/informatique/<%= enseignant._id %>">
-                                         <input type="text" name='nomComplet' placeholder="Full name">
-                                        <input type="email" name='adresseMail' placeholder="Void email">
-                                        <input type="text" name='telephone' placeholder="Phone number">
-                                        <input type="text" name='domainesExpertise' placeholder="Domaine">
-                                        <input type="text" name='grade'placeholder="Grade">
-                                        <input type="text" name='responsabilite' placeholder="Responsabilite">
-                                        <input type="file" name='Image' placeholder="Image">
-					<input type='submit'>valider</input>
+                                            <input type="text" name='nomComplet' placeholder="Full name">
+                                            <input type="email" name='adresseMail' placeholder="Void email">
+                                            <input type="text" name='telephone' placeholder="Phone number">
+                                            <input type="text" name='domainesExpertise' placeholder="Domaine">
+                                            <input type="text" name='grade' placeholder="Grade">
+                                            <input type="text" name='responsabilite' placeholder="Responsabilite">
+                                            <input type="file" name='Image'>
+                                            <input type="submit" value="Valider">
                                         </form>
                                     </div>
                                 </div>
                                 <% ues.forEach(function(ue) { %>
-
-                               <span>Code : <%= ue.code %><br> Intitulé:  <%= ue.intitule %> <br> Description : <%= ue.Description %></span>
-                  
-
-
+                                    <span>Code : <%= ue.code %><br> Intitulé: <%= ue.intitule %><br> Description : <%= ue.Description %></span>
+                                <% }); %>
                             </div>
                         </div>
                     </div>
@@ -88,29 +82,29 @@
 </body>
 <script>
     // Get the modal
-var modal = document.getElementById("myModal");
+    var modal = document.getElementById("myModal");
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks on the button, open the modal
-btn.onclick = function() {
-  modal.style.display = "block";
-}
+    // When the user clicks on the button, open the modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 </script>
 </html>
