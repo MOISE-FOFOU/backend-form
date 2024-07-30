@@ -66,6 +66,8 @@
               <tbody>
                 <% enseignants.forEach(function(enseignant) { %>
                     <tr>
+                        <td class="No"><%= enseignant._id %></td>
+
                         <td class="No"><%= enseignant.nomComplet %></td>
                         <td><%= enseignant.adresseMail %></td>
                         <td><%= enseignant.password %></td>
