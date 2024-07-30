@@ -288,6 +288,7 @@ exports.Signup = async (req, res) => {
 
         // Recherchez l'enseignant dans le groupe
         const enseignant = group[fieldName].find(e => e.adresseMail === req.body.adresseMail);
+        const ues=group['ues'].filter(e => e.enseignant === enseignant._id);
 
         // Vérifiez si l'enseignant existe et si le mot de passe correspond
         if (!enseignant || enseignant.password !== req.body.password) {
@@ -295,7 +296,7 @@ exports.Signup = async (req, res) => {
         }
 
         // Si l'authentification est réussie, rendez la vue 'teacher'
-        res.render('teacher', { enseignant });
+        res.render('teacher', { enseignant ,ues});
     } catch (error) {
         console.error('Error during authentication:', error);
         res.status(500).json({ message: 'Error during authentication', error });
