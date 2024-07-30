@@ -56,7 +56,7 @@
                                     <!-- Modal content -->
                                     <div class="modal-content">
                                         <span class="close">&times;</span>
-                                        <form method='post' action="/Updateinfosenseignants/informatique/<%= enseignant._id %>">
+                                        <form method='post' enctype="multipart/form-data" action="/Updateinfosenseignants/informatique/<%= enseignant._id %>">
                                             <input type="text" value='<%= enseignant.nomComplet %>' name='nomComplet' placeholder="Full name">
                                             <input type="email"  value='<%= enseignant.adresseMail %>' name='adresseMail' placeholder="Void email">
                                             <input type="text"  value='<%= enseignant.telephone %>' name='telephone' placeholder="Phone number">
