@@ -4,9 +4,11 @@
         <span class="fas fa-search"></span>
         <input type="search" placeholder="search" onkeyup="filtrer()" id="search"/>
     </div>
-  </header>
-  <main>
+</header>
+
+<main>
     <i class="fas fa-plus plus" id="myBtn" onclick="mybtn()"></i>
+
     <!-- The Modal -->
     <div id="myModal" class="modal">
         <!-- Modal content -->
@@ -19,7 +21,7 @@
                 </div>
                 <div class="form-group mb-2">
                     <label for="adresseMail">Adresse Mail</label>
-                    <input type="text" id="adresseMail" name="adresseMail" class="form-control" placeholder="Adresse Mail" required>
+                    <input type="email" id="adresseMail" name="adresseMail" class="form-control" placeholder="Adresse Mail" required>
                 </div>
                 <div class="form-group mb-2">
                     <label for="telephone">Téléphone</label>
@@ -41,34 +43,32 @@
                     <label for="Image">Image Profil</label>
                     <input type="file" id="Image" name="Image" class="form-control" required>
                 </div>
-                <button type="submit" onclick="clickRubrique('/Enseignant');" class="btn btn-primary btn-block">Enregistrer</button>
+                <button type="submit" class="btn btn-primary btn-block">Enregistrer</button>
             </form>
         </div>
     </div>
 
-      <div class="list">
-          <h2>Liste d'enseignant</h2>
-          <hr>
-          <table id="list">
-              <thead>
-                  <tr>
+    <div class="list">
+        <h2>Liste d'enseignant</h2>
+        <hr>
+        <table id="list">
+            <thead>
+                <tr>
                     <th>NOM</th>
                     <th>MAIL</th>
                     <th>PASSWORD</th>
-                    <th>TELEPHONE</th>
+                    <th>TÉLÉPHONE</th>
                     <th>DOMAINE EXPERTISE</th>
                     <th>GRADE</th>
-                    <th>RESPONSABILITE</th>
+                    <th>RESPONSABILITÉ</th>
                     <th>PHOTO</th>
                     <th>ACTIONS</th>
-                  </tr>
-              </thead>
-              <tbody>
+                </tr>
+            </thead>
+            <tbody>
                 <% enseignants.forEach(function(enseignant) { %>
                     <tr>
-                        <td class="No"><%= enseignant._id %></td>
-
-                        <td class="No"><%= enseignant.nomComplet %></td>
+                        <td><%= enseignant.nomComplet %></td>
                         <td><%= enseignant.adresseMail %></td>
                         <td><%= enseignant.password %></td>
                         <td><%= enseignant.telephone %></td>
@@ -78,25 +78,24 @@
                         <td><img src="<%= enseignant.Image %>" alt="Image" class="img-fluid" style="max-width: 100px;"></td>
                         <td>
                             <div class="yoyo">
-
-                        <button class="btn  mb-2" onclick="edit('<%= enseignant._id %>')">
-                            <i class="fas fa-pen"></i>
-                        </button>
-                        
-                        <% if (enseignant.activated === true) { %>
-                            <button class=" btn-secondary mb-2" onclick="updateActive('/Activateenseignant/<%= enseignant._id %>', '<%= enseignant.activated %>', '/Enseignant')">
-                                <i class="fas fa-toggle-on"></i>
-                            </button>
-                        <% } else { %>
-                            <button class=" btn-secondary mb-2" onclick="updateActive('/Activateenseignant/<%= enseignant._id %>', '<%= enseignant.activated %>', '/Enseignant')">
-                                <i class="fas fa-toggle-off"></i>
-                            </button>
-                        <% } %>
-                </div>
-                </td>
+                                <button class="btn mb-2" onclick="edit('<%= enseignant._id %>')">
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                                
+                                <% if (enseignant.activated) { %>
+                                    <button class="btn-secondary mb-2" onclick="updateActive('/Activateenseignant/<%= enseignant._id %>', '<%= enseignant.activated %>', '/Enseignant')">
+                                        <i class="fas fa-toggle-on"></i>
+                                    </button>
+                                <% } else { %>
+                                    <button class="btn-secondary mb-2" onclick="updateActive('/Activateenseignant/<%= enseignant._id %>', '<%= enseignant.activated %>', '/Enseignant')">
+                                        <i class="fas fa-toggle-off"></i>
+                                    </button>
+                                <% } %>
+                            </div>
+                        </td>
                     </tr>
                     <tr id="editForm<%= enseignant._id %>" style="display: none;">
-                        <td colspan="10">
+                        <td colspan="9">
                             <form method="post" class="update-form" enctype="multipart/form-data" action="/Updateenseignant/<%= enseignant._id %>" style="display: flex; flex-wrap: wrap;">
                                 <input type="hidden" name="_method" value="PUT">
                                 <div class="form-group mb-2 w-100">
@@ -105,7 +104,7 @@
                                 </div>
                                 <div class="form-group mb-2 w-100">
                                     <label for="update-adresseMail">Adresse Mail</label>
-                                    <input type="text" id="update-adresseMail" name="adresseMail" class="form-control" value="<%= enseignant.adresseMail %>">
+                                    <input type="email" id="update-adresseMail" name="adresseMail" class="form-control" value="<%= enseignant.adresseMail %>">
                                 </div>
                                 <div class="form-group mb-2 w-100">
                                     <label for="update-telephone">Téléphone</label>
@@ -128,14 +127,14 @@
                                     <input type="file" id="Image" name="Image" class="form-control">
                                 </div>
                                 <div class="form-group mb-2 w-100">
-                                    <button type="submit" class="btn btn-success btn-block" onclick="clickRubrique('/Enseignant');">Update</button>
+                                    <button type="submit" class="btn btn-success btn-block">Update</button>
                                     <button type="button" class="btn btn-danger btn-block" onclick="edit('<%= enseignant._id %>')">Cancel</button>
                                 </div>
                             </form>
                         </td>
                     </tr>
-                    <% }); %>
-              </tbody>
-          </table>
-      </div>
-  </main>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+</main>
