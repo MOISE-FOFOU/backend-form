@@ -57,12 +57,12 @@
                                     <div class="modal-content">
                                         <span class="close">&times;</span>
                                         <form action="/Updateinfosenseignants/informatique/<%= enseignant._id %>">
-                                            <input type="text" name='nomComplet' placeholder="Full name">
-                                            <input type="email" name='adresseMail' placeholder="Void email">
-                                            <input type="text" name='telephone' placeholder="Phone number">
-                                            <input type="text" name='domainesExpertise' placeholder="Domaine">
-                                            <input type="text" name='grade' placeholder="Grade">
-                                            <input type="text" name='responsabilite' placeholder="Responsabilite">
+                                            <input type="text" value='<%= enseignant.nomComplet %>' name='nomComplet' placeholder="Full name">
+                                            <input type="email"  value='<%= enseignant.adresseMail %>' name='adresseMail' placeholder="Void email">
+                                            <input type="text"  value='<%= enseignant.telephone %>' name='telephone' placeholder="Phone number">
+                                            <input type="text"  value='<%= enseignant.domainesExpertise %>'name='domainesExpertise' placeholder="Domaine">
+                                            <input type="text" value='<%= enseignant.grade %>' name='grade' placeholder="Grade">
+                                            <input type="text"  value='<%= enseignant.responsabilite %>' name='responsabilite' placeholder="Responsabilite">
                                             <input type="file" name='Image'>
                                             <input type="submit" value="Valider">
                                         </form>
