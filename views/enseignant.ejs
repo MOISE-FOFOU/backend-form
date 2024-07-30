@@ -54,6 +54,8 @@
         <table id="list">
             <thead>
                 <tr>
+                    <th>ID</th>
+
                     <th>NOM</th>
                     <th>MAIL</th>
                     <th>PASSWORD</th>
@@ -68,6 +70,8 @@
             <tbody>
                 <% enseignants.forEach(function(enseignant) { %>
                     <tr>
+                        <td><%= enseignant._id %></td>
+
                         <td><%= enseignant.nomComplet %></td>
                         <td><%= enseignant.adresseMail %></td>
                         <td><%= enseignant.password %></td>
