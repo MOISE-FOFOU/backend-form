@@ -283,23 +283,25 @@ exports.Signup = async (req, res) => {
 
         // Vérifiez si le groupe existe
         if (!group) {
-            return res.status(400).json({ message: 'Invalid email or password' });
+            return res.status(400).json({ message: 'Groupe non trouvé' });
         }
 
         // Recherchez l'enseignant dans le groupe
         const enseignant = group[fieldName].find(e => e.adresseMail === req.body.adresseMail);
-        const ues=group['ues'].filter(e => e.enseignant === enseignant._id);
 
         // Vérifiez si l'enseignant existe et si le mot de passe correspond
         if (!enseignant || enseignant.password !== req.body.password) {
-            return res.status(400).json({ message: 'Invalid email or password' });
+            return res.status(400).json({ message: 'Email ou mot de passe invalide' });
         }
 
+        // Filtrez les UEs associées à l'enseignant
+        const ues = group.ues.filter(ue => ue.enseignant.toString() === enseignant._id.toString());
+
         // Si l'authentification est réussie, rendez la vue 'teacher'
-        res.render('teacher', { enseignant ,ues});
+        res.render('teacher', { enseignant, ues });
     } catch (error) {
-        console.error('Error during authentication:', error);
-        res.status(500).json({ message: 'Error during authentication', error });
+        console.error('Erreur lors de l\'authentification:', error);
+        res.status(500).json({ message: 'Erreur lors de l\'authentification', error });
     }
 };
 
