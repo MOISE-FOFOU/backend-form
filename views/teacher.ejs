@@ -54,23 +54,30 @@
                             </div>
                             <hr>
                             <div class="list">
-                                <i class="fas fa-plus plus" id="myBtn"></i>
+                                <i class="fas fa-edit plus" id="myBtn"></i>
                                 <!-- The Modal -->
                                 <div id="myModal" class="modal">
                                     <!-- Modal content -->
                                     <div class="modal-content">
                                         <span class="close">&times;</span>
-                                        <form action="">
-                                            <input type="text" placeholder="Code">
-                                            <input type="text" placeholder="Intitulé">
-                                            <input type="text" placeholder="Description">
+                                        <form action="/Updateinfosenseignants/informatique/<%= enseignant._id %>">
+                                         <input type="text" name='nomComplet' placeholder="Full name">
+                                        <input type="email" name='adresseMail' placeholder="Void email">
+                                        <input type="text" name='telephone' placeholder="Phone number">
+                                        <input type="text" name='domainesExpertise' placeholder="Domaine">
+                                        <input type="text" name='grade'placeholder="Grade">
+                                        <input type="text" name='responsabilite' placeholder="Responsabilite">
+                                        <input type="file" name='Image' placeholder="Image">
                                             <button>Valider</button>
                                         </form>
                                     </div>
                                 </div>
-                                <span>Code : <br> Intitulé <br> Description : texte</span>
-                                <span>Code : <br> Intitulé <br> Description : texte</span>
-                                <span>Code : <br> Intitulé <br> Description : texte</span>
+                                <% ues.forEach(function(ue) { %>
+
+                               <span>Code : <%= ue.code %><br> Intitulé:  <%= ue.intitule %> <br> Description : <%= ue.Description %></span>
+                  
+
+
                             </div>
                         </div>
                     </div>
